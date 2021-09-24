@@ -27,7 +27,7 @@ public class EntityBackpack implements ItemEntity, InventoryBase {
 
     public EntityBackpack(CompoundTag compoundTag) {
         ListTag items = compoundTag.getListTag("Items");
-        this.INVENTORY = new ItemInstance[36];
+        this.INVENTORY = new ItemInstance[27];
 
         for(int q = 0; q < items.size(); q++) {
             CompoundTag tag = (CompoundTag)items.get(q);
@@ -59,7 +59,7 @@ public class EntityBackpack implements ItemEntity, InventoryBase {
 
     @Override
     public int getInventorySize() {
-        return 36;
+        return 27;
     }
 
     @Override
