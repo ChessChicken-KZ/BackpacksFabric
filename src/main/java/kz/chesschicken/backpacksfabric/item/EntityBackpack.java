@@ -17,17 +17,15 @@ public class EntityBackpack implements ItemEntity, InventoryBase {
     }
 
     public EntityBackpack(ItemInstance[] toCopy) {
-        this.INVENTORY = new ItemInstance[toCopy.length];
-
-        for(int i = 0; i < toCopy.length; i++) {
+        this();
+        for(int i = 0; i < INVENTORY.length; i++)
             if(toCopy[i] != null)
                 this.INVENTORY[i] = toCopy[i].copy();
-        }
     }
 
     public EntityBackpack(CompoundTag compoundTag) {
+        this();
         ListTag items = compoundTag.getListTag("Items");
-        this.INVENTORY = new ItemInstance[27];
 
         for(int q = 0; q < items.size(); q++) {
             CompoundTag tag = (CompoundTag)items.get(q);
@@ -59,7 +57,7 @@ public class EntityBackpack implements ItemEntity, InventoryBase {
 
     @Override
     public int getInventorySize() {
-        return 27;
+        return INVENTORY.length;
     }
 
     @Override

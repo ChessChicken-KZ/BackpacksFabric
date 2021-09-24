@@ -46,8 +46,10 @@ public class ItemBackpack extends TemplateItemBase implements ItemWithEntity {
 
     @Override
     public ItemInstance use(ItemInstance item, Level level, PlayerBase player) {
-        if(item != null && player.inventory.getHeldItem().itemId == BackpacksListener.BACKPACK.id)
-            GuiHelper.openGUI(player, Identifier.of(BackpacksListener.modID, "backpacks_inventory"), ((EntityBackpack) HasItemEntity.cast(item).getItemEntity()) ,new Chest(player.inventory, ((EntityBackpack) HasItemEntity.cast(item).getItemEntity())) );
+        if(item != null && player.inventory.getHeldItem().itemId == BackpacksListener.BACKPACK.id) {
+            EntityBackpack backpack = ((EntityBackpack) HasItemEntity.cast(item).getItemEntity());
+            GuiHelper.openGUI(player, Identifier.of("backpacksfabric:backpacks_inventory"), backpack, new Chest(player.inventory, backpack));
+        }
         return item;
     }
 }
