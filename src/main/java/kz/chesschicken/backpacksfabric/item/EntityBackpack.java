@@ -25,7 +25,7 @@ public class EntityBackpack implements ItemEntity, InventoryBase {
 
     public EntityBackpack(CompoundTag compoundTag) {
         this();
-        ListTag items = compoundTag.getListTag("Items");
+        ListTag items = compoundTag.getListTag("backpacksfabric.Items");
 
         for(int q = 0; q < items.size(); q++) {
             CompoundTag tag = (CompoundTag)items.get(q);
@@ -52,7 +52,7 @@ public class EntityBackpack implements ItemEntity, InventoryBase {
             }
         }
 
-        tag.put("Items", listTag);
+        tag.put("backpacksfabric.Items", listTag);
     }
 
     @Override
@@ -107,6 +107,6 @@ public class EntityBackpack implements ItemEntity, InventoryBase {
 
     @Override
     public boolean canPlayerUse(PlayerBase player) {
-        return player.inventory.getHeldItem().itemId == BackpacksListener.BACKPACK.id;
+        return player.inventory.getHeldItem() != null && player.inventory.getHeldItem().itemId == BackpacksListener.BACKPACK.id;
     }
 }

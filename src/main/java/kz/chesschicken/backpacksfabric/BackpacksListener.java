@@ -2,6 +2,7 @@ package kz.chesschicken.backpacksfabric;
 
 import kz.chesschicken.backpacksfabric.item.EntityBackpack;
 import kz.chesschicken.backpacksfabric.item.ItemBackpack;
+import kz.chesschicken.backpacksfabric.item.ItemEntityTest;
 import net.mine_diver.unsafeevents.listener.EventListener;
 import net.modificationstation.stationapi.api.client.event.texture.TextureRegisterEvent;
 import net.modificationstation.stationapi.api.client.texture.atlas.Atlases;
@@ -17,6 +18,7 @@ import uk.co.benjiweber.expressions.tuple.BiTuple;
 public class BackpacksListener {
 
     public static TemplateItemBase BACKPACK;
+    public static TemplateItemBase TEST;
 
     public static int[] COLOURS;
 
@@ -27,6 +29,7 @@ public class BackpacksListener {
     @EventListener
     public void registerItems(ItemRegistryEvent event) {
         BACKPACK = new ItemBackpack(Identifier.of(modID, "backpack")).setTranslationKey(modID, "backpack");
+        TEST = new ItemEntityTest(Identifier.of(modID, "test")).setTranslationKey(modID, "test");
     }
 
     @SuppressWarnings("unused")

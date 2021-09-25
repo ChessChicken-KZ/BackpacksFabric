@@ -93,7 +93,7 @@ dependencies {
 
 	modImplementation "com.github.minecraft-cursed-legacy:cursed-fabric-loader:${project.loader_version}"
 
-	modImplementation 'com.github.ModificationStation:StationAPI:a9595e834a'
+	modImplementation 'com.github.ModificationStation:StationAPI:2.0-PRE2'
 
 }
 
