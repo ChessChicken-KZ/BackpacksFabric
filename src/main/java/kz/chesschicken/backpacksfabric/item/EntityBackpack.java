@@ -6,41 +6,29 @@ import net.minecraft.inventory.InventoryBase;
 import net.minecraft.item.ItemInstance;
 import net.minecraft.util.io.CompoundTag;
 import net.minecraft.util.io.ListTag;
-import net.modificationstation.stationapi.api.item.nbt.ItemEntity;
 
-public class EntityBackpack implements ItemEntity, InventoryBase {
+import java.util.Arrays;
 
-    private final ItemInstance[] INVENTORY;
+public class EntityBackpack implements InventoryBase {
+
+    public final ItemInstance[] INVENTORY;
 
     public EntityBackpack() {
         this.INVENTORY = new ItemInstance[27];
     }
 
-    public EntityBackpack(ItemInstance[] toCopy) {
-        this();
-        for(int i = 0; i < INVENTORY.length; i++)
-            if(toCopy[i] != null)
-                this.INVENTORY[i] = toCopy[i].copy();
-    }
-
     public EntityBackpack(CompoundTag compoundTag) {
-        this();
+        this.INVENTORY = new ItemInstance[27];
         ListTag items = compoundTag.getListTag("backpacksfabric.Items");
 
         for(int q = 0; q < items.size(); q++) {
             CompoundTag tag = (CompoundTag)items.get(q);
             int i = tag.getByte("Slot") & 255;
-            if (i < this.INVENTORY.length)
-                this.INVENTORY[i] = new ItemInstance(tag);
+            if (i < INVENTORY.length)
+                INVENTORY[i] = new ItemInstance(tag);
         }
     }
 
-    @Override
-    public ItemEntity copy() {
-        return new EntityBackpack(INVENTORY);
-    }
-
-    @Override
     public void writeToNBT(CompoundTag tag) {
         ListTag listTag = new ListTag();
         for(int q = 0; q < INVENTORY.length; ++q) {
@@ -51,7 +39,6 @@ public class EntityBackpack implements ItemEntity, InventoryBase {
                 listTag.add(item);
             }
         }
-
         tag.put("backpacksfabric.Items", listTag);
     }
 
@@ -102,11 +89,24 @@ public class EntityBackpack implements ItemEntity, InventoryBase {
 
     @Override
     public void markDirty() {
-
     }
 
     @Override
     public boolean canPlayerUse(PlayerBase player) {
         return player.inventory.getHeldItem() != null && player.inventory.getHeldItem().itemId == BackpacksListener.BACKPACK.id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        return Arrays.equals(INVENTORY, ((EntityBackpack) o).INVENTORY);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(INVENTORY);
     }
 }

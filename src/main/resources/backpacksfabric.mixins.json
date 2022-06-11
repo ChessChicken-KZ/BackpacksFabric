@@ -2,12 +2,13 @@
   "required": true,
   "minVersion": "0.8",
   "package": "kz.chesschicken.backpacksfabric.mixin",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_17",
   "mixins": [
   ],
   "server": [
   ],
   "client": [
+    "MixinPlayerInventory"
   ],
   "injectors": {
     "defaultRequire": 1
