@@ -15,6 +15,7 @@ public class EntityBackpack implements InventoryBase {
 
     public EntityBackpack() {
         this.INVENTORY = new ItemInstance[27];
+        BackpacksListener.logger.warn("Dangerous constructor has been used in runtime!");
     }
 
     public EntityBackpack(CompoundTag compoundTag) {

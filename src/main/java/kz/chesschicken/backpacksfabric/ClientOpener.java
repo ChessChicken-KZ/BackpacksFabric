@@ -8,15 +8,17 @@ import net.minecraft.client.gui.screen.ScreenBase;
 import net.minecraft.entity.player.PlayerBase;
 import net.minecraft.inventory.InventoryBase;
 import net.modificationstation.stationapi.api.packet.Message;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class ClientOpener {
 
     @SuppressWarnings({"deprecation", "unused"})
-    public static Minecraft getGame() {
+    public static @NotNull Minecraft getGame() {
         return (Minecraft) FabricLoader.getInstance().getGameInstance();
     }
 
-    public static ScreenBase openBackpack(PlayerBase playerBase, InventoryBase inventoryBase, Message message) {
+    public static @NotNull ScreenBase openBackpack(@NotNull PlayerBase playerBase, @NotNull InventoryBase inventoryBase, @Nullable Message message) {
         return new GuiBackpack(playerBase.inventory, (EntityBackpack) inventoryBase);
     }
 
