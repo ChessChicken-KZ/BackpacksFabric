@@ -1,11 +1,9 @@
 package kz.chesschicken.backpacksfabric;
 
 import net.minecraft.item.ItemInstance;
-import net.modificationstation.stationapi.api.registry.BlockRegistry;
-import net.modificationstation.stationapi.api.registry.Identifier;
-import net.modificationstation.stationapi.api.registry.ItemRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import uk.co.benjiweber.expressions.tuple.BiTuple;
 
 import java.util.*;
 import java.util.function.Function;
@@ -27,28 +25,16 @@ public class ArrayUtils {
         return a;
     }
 
-    @SuppressWarnings("OptionalGetWithoutIsPresent")
-    public static @Nullable Identifier parseId(int i) {
-        final BlockRegistry blockData = (BlockRegistry) BlockRegistry.REGISTRIES.get(Identifier.of("stationapi:blocks")).get();
-        if(blockData.get(i).isPresent())
-            return blockData.getIdentifier(blockData.get(i).get());
-        final ItemRegistry itemData = (ItemRegistry) ItemRegistry.REGISTRIES.get(Identifier.of("stationapi:items")).get();
-        if(itemData.get(i).isPresent())
-            return itemData.getIdentifier(itemData.get(i).get());
-        return null;
-    }
-
     public static @Nullable String @NotNull [] abuseIdentifiers(@Nullable ItemInstance @NotNull [] backpackContent) {
-        Map<Identifier, Integer> temp = new HashMap<>();
+        Map<BiTuple<Integer, Integer>, Integer> temp = new HashMap<>();
         Arrays.stream(backpackContent).filter(Objects::nonNull).forEach(instance -> {
-            Identifier aValue = parseId(instance.itemId);
-            //if(aValue == null)
-            //    return; //Impossible...?
-            if (temp.containsKey(aValue))
-                temp.replace(aValue, temp.get(aValue) + instance.count);
+            BiTuple<Integer, Integer> a = BiTuple.of(instance.itemId, instance.getDamage());
+            if(temp.containsKey(a))
+               temp.replace(a, temp.get(a) + instance.count);
             else
-                temp.put(aValue, instance.count);
+                temp.put(a, instance.count);
         });
-        return transformFromMap(new String[temp.size()], temp, entry -> entry.getKey() + " x" + entry.getValue());
+
+        return transformFromMap(new String[temp.size()], temp, entry -> net.minecraft.client.resource.language.TranslationStorage.getInstance().method_995(new ItemInstance(entry.getKey().one(), 1, entry.getKey().two()).getTranslationKey()) + " x" + entry.getValue());
     }
 }
