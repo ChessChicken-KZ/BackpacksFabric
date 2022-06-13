@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerInventory.class)
 public abstract class MixinPlayerInventory {
+
     @Shadow public ItemInstance[] main;
 
     @Shadow public abstract ItemInstance getHeldItem();

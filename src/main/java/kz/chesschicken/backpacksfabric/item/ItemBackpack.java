@@ -46,6 +46,7 @@ public class ItemBackpack extends TemplateItemBase implements CustomTooltipProvi
         EntityBackpack backpack = new EntityBackpack(StationNBT.cast(itemInstance).getStationNBT());
         if(__prevHash != backpack.hashCode()) {
             __prevHash = backpack.hashCode();
+            BackpacksListener.logger.debug("Updating cached ItemInstance array... " + __prevHash + ".");
             __cached = ArrayUtils.combineTwoArrays(new String[] { originalTooltip, "Content:" }, ArrayUtils.abuseIdentifiers(backpack.INVENTORY));
         }
         return __cached;

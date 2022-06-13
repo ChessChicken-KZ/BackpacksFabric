@@ -8,6 +8,7 @@ import net.modificationstation.stationapi.api.item.nbt.StationNBT;
 import org.lwjgl.opengl.GL11;
 
 public class GuiBackpack extends net.minecraft.client.gui.screen.container.ContainerBase {
+
     protected final EntityBackpack backpack;
 
     public GuiBackpack(PlayerInventory arg, EntityBackpack arg1) {
@@ -15,9 +16,7 @@ public class GuiBackpack extends net.minecraft.client.gui.screen.container.Conta
         this.backpack = arg1;
     }
 
-    /**
-     * Should work with client side.
-     */
+    /* Should work with client side. */
     @Override
     public void onClose() {
         if(minecraft.player.getHeldItem() != null && minecraft.player.getHeldItem().itemId == BackpacksListener.BACKPACK.id) {

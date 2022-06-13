@@ -89,8 +89,7 @@ public class EntityBackpack implements InventoryBase {
     }
 
     @Override
-    public void markDirty() {
-    }
+    public void markDirty() {}
 
     @Override
     public boolean canPlayerUse(PlayerBase player) {

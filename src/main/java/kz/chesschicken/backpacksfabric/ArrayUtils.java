@@ -18,12 +18,6 @@ public class ArrayUtils {
         return send;
     }
 
-    public static <T> @NotNull T[] transformIntuitive(@NotNull T[] t, @NotNull Function<Integer, T> process) {
-        for (int i = 0; i < t.length; i++)
-            t[i] = process.apply(i);
-        return t;
-    }
-
     public static <T, A, B> @Nullable T @NotNull [] transformFromMap(@Nullable T @NotNull [] a, @NotNull Map<A, B> map, @NotNull Function<Map.@NotNull Entry<A, B>, @Nullable T> transformer) {
         int q = 0;
         for(Map.Entry<A, B> e : map.entrySet()) {
@@ -45,14 +39,16 @@ public class ArrayUtils {
     }
 
     public static @Nullable String @NotNull [] abuseIdentifiers(@Nullable ItemInstance @NotNull [] backpackContent) {
-        Map<Identifier, Integer> tempHolder = new HashMap<>();
+        Map<Identifier, Integer> temp = new HashMap<>();
         Arrays.stream(backpackContent).filter(Objects::nonNull).forEach(instance -> {
             Identifier aValue = parseId(instance.itemId);
-            if (tempHolder.containsKey(aValue))
-                tempHolder.replace(aValue, tempHolder.get(aValue) + instance.count);
+            //if(aValue == null)
+            //    return; //Impossible...?
+            if (temp.containsKey(aValue))
+                temp.replace(aValue, temp.get(aValue) + instance.count);
             else
-                tempHolder.put(aValue, instance.count);
+                temp.put(aValue, instance.count);
         });
-        return transformFromMap(new String[tempHolder.size()], tempHolder, entry -> entry.getKey() + " x" + entry.getValue());
+        return transformFromMap(new String[temp.size()], temp, entry -> entry.getKey() + " x" + entry.getValue());
     }
 }
