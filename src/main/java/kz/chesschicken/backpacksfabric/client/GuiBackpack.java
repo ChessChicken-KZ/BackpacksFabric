@@ -2,18 +2,19 @@ package kz.chesschicken.backpacksfabric.client;
 
 import kz.chesschicken.backpacksfabric.BackpacksListener;
 import kz.chesschicken.backpacksfabric.item.EntityBackpack;
+import net.minecraft.client.gui.screen.container.ContainerBase;
 import net.minecraft.container.Chest;
 import net.minecraft.entity.player.PlayerInventory;
 import net.modificationstation.stationapi.api.item.nbt.StationNBT;
 import org.lwjgl.opengl.GL11;
 
-public class GuiBackpack extends net.minecraft.client.gui.screen.container.ContainerBase {
+public class GuiBackpack extends ContainerBase {
 
     protected final EntityBackpack backpack;
 
-    public GuiBackpack(PlayerInventory arg, EntityBackpack arg1) {
-        super(new Chest(arg, arg1));
-        this.backpack = arg1;
+    public GuiBackpack(PlayerInventory inventory, EntityBackpack backpack) {
+        super(new Chest(inventory, backpack));
+        this.backpack = backpack;
     }
 
     /* Should work with client side. */

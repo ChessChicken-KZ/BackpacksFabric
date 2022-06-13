@@ -2,5 +2,23 @@
   "parent": "item/generated",
   "textures": {
     "layer0": "backpacksfabric:items/backpack_brown"
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {"meta": 1},
+      "model": "backpacksfabric:item/backpack_yellow"
+    },
+    {
+      "predicate": {"meta": 2},
+      "model": "backpacksfabric:item/backpack_red"
+    },
+    {
+      "predicate": {"meta": 3},
+      "model": "backpacksfabric:item/backpack_green"
+    },
+    {
+      "predicate": {"meta": 4},
+      "model": "backpacksfabric:item/backpack_blue"
+    }
+  ]
 }
